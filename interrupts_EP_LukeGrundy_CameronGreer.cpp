@@ -23,6 +23,20 @@ void FCFS(std::vector<PCB> &ready_queue) {
             );
 }
 
+// places the process to be executed next at the front of the ready queue (based on PID)
+void EP(std::vector<PCB> &ready_queue) {
+    if (ready_queue.size() == 1) {
+        return;
+    }
+    PID next = ready_queue[0];
+    for (int i = 1; i < ready_queue.size(); i++) {
+        if (ready_queue[i].PID < next.PID){
+            next = ready_queue[i];
+        }
+    }
+    std::swap(next, ready_queue.back());
+}
+
 std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std::vector<PCB> list_processes) {
 
     std::vector<PCB> ready_queue;   //The ready queue of processes
@@ -68,16 +82,25 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
         }
 
         ///////////////////////MANAGE WAIT QUEUE/////////////////////////
-        //This mainly involves keeping track of how long a process must remain in the ready queue
+        //This mainly involves keeping track of how long a process must remain in the wait queue
+	for (PID process : wait_queue){
+	    if (process.io_duration j){
+		process.state = READY;
+		ready_queue.push_back(process);
+		job_list.push_back(process);
 
+		execution_status += print_exec_status(current_time, process.PID, WAITING, READY);
+	    }
+	}
         /////////////////////////////////////////////////////////////////
 
         //////////////////////////SCHEDULER//////////////////////////////
-        FCFS(ready_queue); //example of FCFS is shown here
+        EP(ready_queue);
+	run_process(&running, &job_list, &ready_queue, current_time);
         /////////////////////////////////////////////////////////////////
 
     }
-    
+
     //Close the output table
     execution_status += print_exec_footer();
 
