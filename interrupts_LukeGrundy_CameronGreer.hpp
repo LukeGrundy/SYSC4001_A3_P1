@@ -1,7 +1,13 @@
 /**
  * @file interrupts.hpp
  * @author Sasisekhar Govind
+ * 
+ * @author Luke Grundy
+ * @author Cameron Greer    
+ * 
  * @brief template main.cpp file for Assignment 3 Part 1 of SYSC4001
+ * 
+ * @date November 25th, 2025
  * 
  */
 

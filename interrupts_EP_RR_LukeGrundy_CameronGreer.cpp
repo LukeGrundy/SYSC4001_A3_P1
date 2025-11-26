@@ -1,11 +1,17 @@
 /**
  * @file interrupts.cpp
  * @author Sasisekhar Govind
+ * 
+ * @author Luke Grundy
+ * @author Cameron Greer  
+ * 
  * @brief template main.cpp file for Assignment 3 Part 1 of SYSC4001
+ * 
+ * @date November 25th, 2025
  * 
  */
 
-#include<interrupts_student1_student2.hpp>
+#include<interrupts_LukeGrundy_CameronGreer.hpp>
 
 void FCFS(std::vector<PCB> &ready_queue) {
     std::sort( 
