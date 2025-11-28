@@ -28,7 +28,7 @@ void EP(std::vector<PCB> &ready_queue) {
     if (ready_queue.size() == 1) {
         return;
     }
-    PID next = ready_queue[0];
+    PCB next = ready_queue[0];
     for (int i = 1; i < ready_queue.size(); i++) {
         if (ready_queue[i].PID < next.PID){
             next = ready_queue[i];
@@ -83,8 +83,8 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
         ///////////////////////MANAGE WAIT QUEUE/////////////////////////
         //This mainly involves keeping track of how long a process must remain in the wait queue
-	for (PID process : wait_queue){
-	    if (process.io_duration j){
+	for (PCB process : wait_queue){
+	    if (current_time >= process.io_start_time + process.io_duration){
 		process.state = READY;
 		ready_queue.push_back(process);
 		job_list.push_back(process);
@@ -96,7 +96,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
         //////////////////////////SCHEDULER//////////////////////////////
         EP(ready_queue);
-	run_process(&running, &job_list, &ready_queue, current_time);
+	run_process(running, job_list, ready_queue, current_time);
         /////////////////////////////////////////////////////////////////
 
     }

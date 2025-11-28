@@ -71,6 +71,7 @@ struct PCB{
     enum states     state;
     unsigned int    io_freq;
     unsigned int    io_duration;
+    unsigned int    io_start_time;
 };
 
 //------------------------------------HELPER FUNCTIONS FOR THE SIMULATOR------------------------------
