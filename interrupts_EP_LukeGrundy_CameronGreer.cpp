@@ -97,10 +97,18 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
         /////////////////////////////////////////////////////////////////
 
         //////////////////////////SCHEDULER//////////////////////////////
-        EP(ready_queue);
-	run_process(running, job_list, ready_queue, current_time);
+	if (running.state == TERMINATED){
+	    EP(ready_queue);
+	    run_process(running, job_list, ready_queue, current_time);
+	} else if (running.remaining_time <= 0){
+	    terminate_process(running, job_list);
+	} else {
+	    running.processing_time++;
+	    running.remaining_time--;
+	}
         /////////////////////////////////////////////////////////////////
 
+	current_time++;
     }
 
     //Close the output table
