@@ -59,7 +59,7 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
     //Loop while till there are no ready or waiting processes.
     //This is the main reason I have job_list, you don't have to use it.
-    while(!all_process_terminated(job_list) || job_list.empty()) {
+    while(!all_process_terminated(job_list)) {
 
         //Inside this loop, there are three things you must do:
         // 1) Populate the ready queue with processes as they arrive
@@ -97,32 +97,30 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
         /////////////////////////////////////////////////////////////////
 
         //////////////////////////SCHEDULER//////////////////////////////
-	if (running.state == TERMINATED || running.state == NOT_ASSIGNED || running.state == WAITING){
-	    EP(ready_queue);
-	    run_process(running, job_list, ready_queue, current_time);
-
-	    execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
-
-	    running.processing_time++;
-	    running.remaining_time--;
-	    current_time++;
-	} else if (running.remaining_time <= 0){
+	if (running.remaining_time <= 0){
 	    terminate_process(running, job_list);
 
 	    execution_status += print_exec_status(current_time, running.PID, RUNNING, TERMINATED);
-	} else if (running.processing_time % running.io_freq == 0){
+	}
+	if (running.processing_time > 0 && running.io_freq > 0 && running.processing_time % running.io_freq == 0){
 	    running.state = WAITING;
 	    running.io_start_time = current_time;
 	    wait_queue.push_back(running);
 	    sync_queue(job_list, running);
 
 	    execution_status += print_exec_status(current_time, running.PID, RUNNING, WAITING);
-	} else {
-	    running.processing_time++;
-	    running.remaining_time--;
-	    current_time++;
 	}
-        /////////////////////////////////////////////////////////////////
+
+	running.processing_time++;
+	running.remaining_time--;
+	current_time++;
+
+	if (running.state == TERMINATED || running.state == WAITING || running.state == NOT_ASSIGNED){
+	    EP(ready_queue);
+	    run_process(running, job_list, ready_queue, current_time);
+
+	    execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
+	}
     }
 
     //Close the output table
