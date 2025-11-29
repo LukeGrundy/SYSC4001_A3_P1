@@ -25,7 +25,7 @@ void FCFS(std::vector<PCB> &ready_queue) {
 
 // places the process to be executed next at the front of the ready queue (based on PID)
 void EP(std::vector<PCB> &ready_queue) {
-    if (ready_queue.size() == 1) {
+    if (ready_queue.size() <= 1) {
         return;
     }
     PCB next = ready_queue[0];
@@ -59,8 +59,8 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
     //Loop while till there are no ready or waiting processes.
     //This is the main reason I have job_list, you don't have to use it.
-    while(!all_process_terminated(job_list)) {
-
+    while(!all_process_terminated(job_list) || job_list.empty()) {
+std::cout << running.state << " : " << current_time << std::endl;
         //Inside this loop, there are three things you must do:
         // 1) Populate the ready queue with processes as they arrive
         // 2) Manage the wait queue
@@ -97,30 +97,34 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
         /////////////////////////////////////////////////////////////////
 
         //////////////////////////SCHEDULER//////////////////////////////
-	if (running.remaining_time <= 0){
-	    terminate_process(running, job_list);
-
-	    execution_status += print_exec_status(current_time, running.PID, RUNNING, TERMINATED);
-	}
-	if (running.processing_time > 0 && running.io_freq > 0 && running.processing_time % running.io_freq == 0){
-	    running.state = WAITING;
-	    running.io_start_time = current_time;
-	    wait_queue.push_back(running);
-	    sync_queue(job_list, running);
-
-	    execution_status += print_exec_status(current_time, running.PID, RUNNING, WAITING);
-	}
-
-	running.processing_time++;
-	running.remaining_time--;
-	current_time++;
-
-	if (running.state == TERMINATED || running.state == WAITING || running.state == NOT_ASSIGNED){
+	if (running.state == TERMINATED || running.state == WAITING || running.state == NOT_ASSIGNED ||
+	    running.state == READY){
 	    EP(ready_queue);
 	    run_process(running, job_list, ready_queue, current_time);
 
 	    execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
 	}
+	if (running.remaining_time <= 0){
+	    terminate_process(running, job_list);
+
+	    execution_status += print_exec_status(current_time, running.PID, RUNNING, TERMINATED);
+	    continue;
+	}
+	if (running.processing_time > 0 && running.io_freq > 0){
+	    if (running.processing_time % running.io_freq == 0){
+		running.state = WAITING;
+		running.io_start_time = current_time;
+		wait_queue.push_back(running);
+		sync_queue(job_list, running);
+
+		execution_status += print_exec_status(current_time, running.PID, RUNNING, WAITING);
+		continue;
+	    }
+	}
+
+	running.processing_time++;
+	running.remaining_time--;
+	current_time++;
     }
 
     //Close the output table
