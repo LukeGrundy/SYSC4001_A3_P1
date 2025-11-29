@@ -83,13 +83,15 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
 
         ///////////////////////MANAGE WAIT QUEUE/////////////////////////
         //This mainly involves keeping track of how long a process must remain in the wait queue
-	for (PCB process : wait_queue){
-	    if (current_time >= process.io_start_time + process.io_duration){
-		process.state = READY;
-		ready_queue.push_back(process);
-		job_list.push_back(process);
+	for (int i = 0; i < wait_queue.size(); i++){
+	    if (current_time >= wait_queue[i].io_start_time + wait_queue[i].io_duration){
+		wait_queue[i].state = READY;
+		ready_queue.push_back(wait_queue[i]);
+	        sync_queue(job_list, wait_queue[i]);
 
-		execution_status += print_exec_status(current_time, process.PID, WAITING, READY);
+		execution_status += print_exec_status(current_time, wait_queue[i].PID, WAITING, READY);
+
+		wait_queue.erase(wait_queue.begin() + i);
 	    }
 	}
         /////////////////////////////////////////////////////////////////
