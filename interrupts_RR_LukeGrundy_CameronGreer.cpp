@@ -94,9 +94,11 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
         //////////////////////////SCHEDULER//////////////////////////////
         if (running.state == NOT_ASSIGNED || running.state == WAITING || timeout_timer >= 100){
 	    timeout_timer = 0;
-	    RR(ready_queue);
-	    run_process(running, job_list, ready_queue, current_time);
-	    execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
+	    if (!ready_queue.empty()){
+		RR(ready_queue);
+		run_process(running, job_list, ready_queue, current_time);
+		execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
+	    }
 	} else if (running.state == RUNNING){
 	    if (running.remaining_time <= 0){
 		terminate_process(running, job_list);
