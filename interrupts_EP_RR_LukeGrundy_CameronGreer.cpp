@@ -23,6 +23,19 @@ void FCFS(std::vector<PCB> &ready_queue) {
             );
 }
 
+void EP(std::vector<PCB> &ready_queue){
+    if (ready_queue.size() <= 1){
+	return;
+    }
+    int best = 0;
+    for (int i = 0; i < ready_queue.size(); i++){
+	if (ready_queue[i].PID < ready_queue[best].PID){
+	    best = i;
+	}
+    }
+    std::swap(ready_queue[best], ready_queue.back());
+}
+
 std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std::vector<PCB> list_processes) {
 
     std::vector<PCB> ready_queue;   //The ready queue of processes
@@ -33,6 +46,8 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
                                     //to make the code easier :).
 
     unsigned int current_time = 0;
+    unsigned int timeout_timer = 0;
+    bool preemption = false;
     PCB running;
 
     //Initialize an empty running process
@@ -64,16 +79,65 @@ std::tuple<std::string /* add std::string for bonus mark */ > run_simulation(std
                 job_list.push_back(process); //Add it to the list of processes
 
                 execution_status += print_exec_status(current_time, process.PID, NEW, READY);
+
+		if (running.PID != -1){ //When we get a new process check the PID in case we need to preempt running
+		    if (process.PID < running.PID){
+			preemption = true;
+		    }
+		}
             }
         }
 
         ///////////////////////MANAGE WAIT QUEUE/////////////////////////
         //This mainly involves keeping track of how long a process must remain in the ready queue
-
+	for (int i = 0; i < wait_queue.size(); i++){
+	    if (current_time >= wait_queue[i].io_start_time + wait_queue[i].io_duration){
+		wait_queue[i].state = READY;
+		ready_queue.push_back(wait_queue[i]);
+		sync_queue(job_list, wait_queue[i]);
+		execution_status += print_exec_status(current_time, wait_queue[i].PID, WAITING, READY);
+		wait_queue.erase(wait_queue.begin() + i);
+	    }
+	}
         /////////////////////////////////////////////////////////////////
 
         //////////////////////////SCHEDULER//////////////////////////////
-        FCFS(ready_queue); //example of FCFS is shown here
+        if (preemption || (timeout_timer > 100 && running.PID != -1)){
+	    preemption = false;
+	    running.state = READY;
+	    ready_queue.push_back(running);
+	    sync_queue(job_list, running);
+	    execution_status += print_exec_status(current_time, running.PID, RUNNING, READY);
+	   idle_CPU(running);
+	}
+	if (running.state == NOT_ASSIGNED || running.state == WAITING){
+	    timeout_timer = 0;
+	    if (!ready_queue.empty()){
+		EP(ready_queue);
+		run_process(running, job_list, ready_queue, current_time);
+		execution_status += print_exec_status(current_time, running.PID, READY, RUNNING);
+	    }
+	} else if (running.state == RUNNING){
+	    if (running.remaining_time <= 0){
+		terminate_process(running, job_list);
+		sync_queue(job_list, running);
+		execution_status += print_exec_status(current_time, running.PID, RUNNING, TERMINATED);
+		idle_CPU(running);
+		continue;
+	    } else if (running.io_freq > 0 && running.processing_time != running.remaining_time){
+		if ((running.processing_time - running.remaining_time) % running.io_freq == 0){
+		    running.state = WAITING;
+		    running.io_start_time = current_time;
+		    wait_queue.push_back(running);
+		    sync_queue(job_list, running);
+		    execution_status += print_exec_status(current_time, running.PID, RUNNING, WAITING);
+		    idle_CPU(running);
+		}
+	    }
+	}
+	current_time++;
+	running.remaining_time--;
+	timeout_timer++;
         /////////////////////////////////////////////////////////////////
 
     }
