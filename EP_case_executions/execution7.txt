@@ -1,2 +1,31 @@
-File content overwritten successfully.
-Output generated in execution.txt.txt
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 |  1 |       NEW |     READY |
+|                 0 |  2 |       NEW |     READY |
+|                 0 |  1 |     READY |   RUNNING |
+|                20 |  3 |       NEW |     READY |
+|                80 |  1 |   RUNNING |   WAITING |
+|                81 |  2 |     READY |   RUNNING |
+|               120 |  1 |   WAITING |     READY |
+|               201 |  2 |   RUNNING |   WAITING |
+|               202 |  1 |     READY |   RUNNING |
+|               231 |  2 |   WAITING |     READY |
+|               282 |  1 |   RUNNING |   WAITING |
+|               283 |  2 |     READY |   RUNNING |
+|               322 |  1 |   WAITING |     READY |
+|               343 |  2 |   RUNNING |TERMINATED |
+|               343 |  1 |     READY |   RUNNING |
+|               423 |  1 |   RUNNING |   WAITING |
+|               424 |  3 |     READY |   RUNNING |
+|               463 |  1 |   WAITING |     READY |
+|               524 |  3 |   RUNNING |   WAITING |
+|               525 |  1 |     READY |   RUNNING |
+|               535 |  1 |   RUNNING |TERMINATED |
+|               574 |  3 |   WAITING |     READY |
+|               574 |  3 |     READY |   RUNNING |
+|               674 |  3 |   RUNNING |   WAITING |
+|               724 |  3 |   WAITING |     READY |
+|               724 |  3 |     READY |   RUNNING |
+|               824 |  3 |   RUNNING |TERMINATED |
++------------------------------------------------+

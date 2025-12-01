@@ -1,2 +1,47 @@
-File content overwritten successfully.
-Output generated in execution.txt.txt
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 |  1 |       NEW |     READY |
+|                 0 |  1 |     READY |   RUNNING |
+|               100 |  1 |   RUNNING |   WAITING |
+|               150 |  1 |   WAITING |     READY |
+|               150 |  1 |     READY |   RUNNING |
+|               200 |  2 |       NEW |     READY |
+|               250 |  1 |   RUNNING |   WAITING |
+|               251 |  2 |     READY |   RUNNING |
+|               291 |  2 |   RUNNING |   WAITING |
+|               300 |  1 |   WAITING |     READY |
+|               300 |  1 |     READY |   RUNNING |
+|               321 |  2 |   WAITING |     READY |
+|               400 |  3 |       NEW |     READY |
+|               400 |  1 |   RUNNING |   WAITING |
+|               401 |  2 |     READY |   RUNNING |
+|               441 |  2 |   RUNNING |   WAITING |
+|               442 |  3 |     READY |   RUNNING |
+|               450 |  1 |   WAITING |     READY |
+|               471 |  2 |   WAITING |     READY |
+|               543 |  3 |   RUNNING |     READY |
+|               543 |  1 |     READY |   RUNNING |
+|               593 |  1 |   RUNNING |TERMINATED |
+|               593 |  2 |     READY |   RUNNING |
+|               600 |  4 |       NEW |     READY |
+|               633 |  2 |   RUNNING |   WAITING |
+|               634 |  3 |     READY |   RUNNING |
+|               663 |  2 |   WAITING |     READY |
+|               733 |  3 |   RUNNING |   WAITING |
+|               734 |  4 |     READY |   RUNNING |
+|               793 |  3 |   WAITING |     READY |
+|               835 |  4 |   RUNNING |     READY |
+|               835 |  2 |     READY |   RUNNING |
+|               875 |  2 |   RUNNING |   WAITING |
+|               876 |  3 |     READY |   RUNNING |
+|               905 |  2 |   WAITING |     READY |
+|               976 |  3 |   RUNNING |TERMINATED |
+|               976 |  4 |     READY |   RUNNING |
+|              1055 |  4 |   RUNNING |TERMINATED |
+|              1055 |  2 |     READY |   RUNNING |
+|              1095 |  2 |   RUNNING |   WAITING |
+|              1125 |  2 |   WAITING |     READY |
+|              1125 |  2 |     READY |   RUNNING |
+|              1145 |  2 |   RUNNING |TERMINATED |
++------------------------------------------------+

@@ -1,2 +1,34 @@
-File content overwritten successfully.
-Output generated in execution.txt.txt
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 |  1 |       NEW |     READY |
+|                 0 |  1 |     READY |   RUNNING |
+|                30 |  2 |       NEW |     READY |
+|                60 |  3 |       NEW |     READY |
+|               101 |  1 |   RUNNING |     READY |
+|               101 |  1 |     READY |   RUNNING |
+|               202 |  1 |   RUNNING |     READY |
+|               202 |  1 |     READY |   RUNNING |
+|               303 |  1 |   RUNNING |     READY |
+|               303 |  1 |     READY |   RUNNING |
+|               404 |  1 |   RUNNING |     READY |
+|               404 |  1 |     READY |   RUNNING |
+|               500 |  1 |   RUNNING |TERMINATED |
+|               500 |  2 |     READY |   RUNNING |
+|               601 |  2 |   RUNNING |     READY |
+|               601 |  2 |     READY |   RUNNING |
+|               702 |  2 |   RUNNING |     READY |
+|               702 |  2 |     READY |   RUNNING |
+|               803 |  2 |   RUNNING |     READY |
+|               803 |  2 |     READY |   RUNNING |
+|               904 |  2 |   RUNNING |     READY |
+|               904 |  2 |     READY |   RUNNING |
+|               950 |  2 |   RUNNING |TERMINATED |
+|               950 |  3 |     READY |   RUNNING |
+|              1051 |  3 |   RUNNING |     READY |
+|              1051 |  3 |     READY |   RUNNING |
+|              1150 |  3 |   RUNNING |   WAITING |
+|              1200 |  3 |   WAITING |     READY |
+|              1200 |  3 |     READY |   RUNNING |
+|              1300 |  3 |   RUNNING |TERMINATED |
++------------------------------------------------+

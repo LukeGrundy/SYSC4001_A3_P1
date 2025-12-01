@@ -1,46 +1,61 @@
 #!/bin/bash
 
-# Make sure the output directories exist
-mkdir -p EP_case_executions
-mkdir -p RR_case_executions
-mkdir -p EP_RR_case_executions
+# Output directories
+EP_OUT="EP_case_executions"
+RR_OUT="RR_case_executions"
+EPRR_OUT="EP_RR_case_executions"
 
-# Loop through all 20 tests
-for i in {1..20}
-do
+mkdir -p "$EP_OUT" "$RR_OUT" "$EPRR_OUT"
+
+# Number of tests
+NUM_TESTS=20
+
+for i in $(seq 1 $NUM_TESTS); do
     TEST_FILE="test_cases/test$i"
-    OUTPUT_EP="EP_case_executions/execution$i.txt"
-    OUTPUT_RR="RR_case_executions/execution$i.txt"
-    OUTPUT_EP_RR="EP_RR_case_executions/execution$i.txt"
 
-    echo "Running Test $i"
+    echo "===== Running Test $i ====="
 
-    # EP Scheduler
-    if [ -f bin/interrupts_EP ]; then
-        echo "  EP..."
-        ./bin/interrupts_EP "$TEST_FILE" > "$OUTPUT_EP"
+    #
+    # ----- EP scheduler -----
+    #
+    echo "Running EP on $TEST_FILE"
+    ./bin/interrupts_EP "$TEST_FILE"
+
+    if [ -f execution.txt ]; then
+        mv execution.txt "$EP_OUT/execution$i.txt"
     else
-        echo "  EP executable missing!"
+        echo "!! execution.txt missing after EP test $i"
     fi
 
-    # RR Scheduler
-    if [ -f bin/interrupts_RR ]; then
-        echo "  RR..."
-        ./bin/interrupts_RR "$TEST_FILE" > "$OUTPUT_RR"
+
+    #
+    # ----- RR scheduler -----
+    #
+    echo "Running RR on $TEST_FILE"
+    ./bin/interrupts_RR "$TEST_FILE"
+
+    if [ -f execution.txt ]; then
+        mv execution.txt "$RR_OUT/execution$i.txt"
     else
-        echo "  RR executable missing!"
+        echo "!! execution.txt missing after RR test $i"
     fi
 
-    # EP_RR Scheduler
-    if [ -f bin/interrupts_EP_RR ]; then
-        echo "  EP_RR..."
-        ./bin/interrupts_EP_RR "$TEST_FILE" > "$OUTPUT_EP_RR"
+
+    #
+    # ----- EP+RR Hybrid scheduler -----
+    #
+    echo "Running EP_RR on $TEST_FILE"
+    ./bin/interrupts_EP_RR "$TEST_FILE"
+
+    if [ -f execution.txt ]; then
+        mv execution.txt "$EPRR_OUT/execution$i.txt"
     else
-        echo "  EP_RR executable missing!"
+        echo "!! execution.txt missing after EP_RR test $i"
     fi
+
+    echo "===== Finished Test $i ====="
+    echo
 done
 
-echo ""
-echo "==============================="
-echo " All tests executed successfully!"
-echo "==============================="
+echo "All tests completed."
+

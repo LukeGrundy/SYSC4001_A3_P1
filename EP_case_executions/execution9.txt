@@ -1,2 +1,16 @@
-File content overwritten successfully.
-Output generated in execution.txt.txt
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 |  1 |       NEW |     READY |
+|                 0 |  1 |     READY |   RUNNING |
+|                30 |  2 |       NEW |     READY |
+|                60 |  3 |       NEW |     READY |
+|               500 |  1 |   RUNNING |TERMINATED |
+|               500 |  2 |     READY |   RUNNING |
+|               950 |  2 |   RUNNING |TERMINATED |
+|               950 |  3 |     READY |   RUNNING |
+|              1150 |  3 |   RUNNING |   WAITING |
+|              1200 |  3 |   WAITING |     READY |
+|              1200 |  3 |     READY |   RUNNING |
+|              1300 |  3 |   RUNNING |TERMINATED |
++------------------------------------------------+

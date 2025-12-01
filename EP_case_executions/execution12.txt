@@ -1,2 +1,37 @@
-File content overwritten successfully.
-Output generated in execution.txt.txt
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 |  1 |       NEW |     READY |
+|                 0 |  1 |     READY |   RUNNING |
+|                10 |  2 |       NEW |     READY |
+|                30 |  3 |       NEW |     READY |
+|                80 |  1 |   RUNNING |   WAITING |
+|                81 |  2 |     READY |   RUNNING |
+|               120 |  1 |   WAITING |     READY |
+|               131 |  2 |   RUNNING |   WAITING |
+|               132 |  1 |     READY |   RUNNING |
+|               181 |  2 |   WAITING |     READY |
+|               212 |  1 |   RUNNING |   WAITING |
+|               213 |  2 |     READY |   RUNNING |
+|               252 |  1 |   WAITING |     READY |
+|               263 |  2 |   RUNNING |   WAITING |
+|               264 |  1 |     READY |   RUNNING |
+|               313 |  2 |   WAITING |     READY |
+|               344 |  1 |   RUNNING |   WAITING |
+|               345 |  2 |     READY |   RUNNING |
+|               384 |  1 |   WAITING |     READY |
+|               395 |  2 |   RUNNING |   WAITING |
+|               396 |  1 |     READY |   RUNNING |
+|               445 |  2 |   WAITING |     READY |
+|               456 |  1 |   RUNNING |TERMINATED |
+|               456 |  2 |     READY |   RUNNING |
+|               506 |  2 |   RUNNING |TERMINATED |
+|               506 |  3 |     READY |   RUNNING |
+|               626 |  3 |   RUNNING |   WAITING |
+|               686 |  3 |   WAITING |     READY |
+|               686 |  3 |     READY |   RUNNING |
+|               806 |  3 |   RUNNING |   WAITING |
+|               866 |  3 |   WAITING |     READY |
+|               866 |  3 |     READY |   RUNNING |
+|               886 |  3 |   RUNNING |TERMINATED |
++------------------------------------------------+
