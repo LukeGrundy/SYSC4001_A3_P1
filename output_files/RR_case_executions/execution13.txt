@@ -1,0 +1,47 @@
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 |  1 |       NEW |     READY |
+|                 0 |  1 |     READY |   RUNNING |
+|               100 |  1 |   RUNNING |   WAITING |
+|               150 |  1 |   WAITING |     READY |
+|               150 |  1 |     READY |   RUNNING |
+|               200 |  4 |       NEW |     READY |
+|               250 |  1 |   RUNNING |   WAITING |
+|               251 |  4 |     READY |   RUNNING |
+|               291 |  4 |   RUNNING |   WAITING |
+|               300 |  1 |   WAITING |     READY |
+|               300 |  1 |     READY |   RUNNING |
+|               321 |  4 |   WAITING |     READY |
+|               400 |  3 |       NEW |     READY |
+|               400 |  1 |   RUNNING |   WAITING |
+|               401 |  4 |     READY |   RUNNING |
+|               441 |  4 |   RUNNING |   WAITING |
+|               442 |  3 |     READY |   RUNNING |
+|               450 |  1 |   WAITING |     READY |
+|               471 |  4 |   WAITING |     READY |
+|               543 |  3 |   RUNNING |     READY |
+|               543 |  1 |     READY |   RUNNING |
+|               593 |  1 |   RUNNING |TERMINATED |
+|               593 |  4 |     READY |   RUNNING |
+|               600 |  5 |       NEW |     READY |
+|               633 |  4 |   RUNNING |   WAITING |
+|               634 |  3 |     READY |   RUNNING |
+|               663 |  4 |   WAITING |     READY |
+|               733 |  3 |   RUNNING |   WAITING |
+|               734 |  5 |     READY |   RUNNING |
+|               793 |  3 |   WAITING |     READY |
+|               835 |  5 |   RUNNING |     READY |
+|               835 |  4 |     READY |   RUNNING |
+|               875 |  4 |   RUNNING |   WAITING |
+|               876 |  3 |     READY |   RUNNING |
+|               905 |  4 |   WAITING |     READY |
+|               976 |  3 |   RUNNING |TERMINATED |
+|               976 |  5 |     READY |   RUNNING |
+|              1055 |  5 |   RUNNING |TERMINATED |
+|              1055 |  4 |     READY |   RUNNING |
+|              1095 |  4 |   RUNNING |   WAITING |
+|              1125 |  4 |   WAITING |     READY |
+|              1125 |  4 |     READY |   RUNNING |
+|              1145 |  4 |   RUNNING |TERMINATED |
++------------------------------------------------+

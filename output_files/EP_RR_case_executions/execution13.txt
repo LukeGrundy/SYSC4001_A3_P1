@@ -1,0 +1,47 @@
++------------------------------------------------+
+|Time of Transition |PID | Old State | New State |
++------------------------------------------------+
+|                 0 |  1 |       NEW |     READY |
+|                 0 |  1 |     READY |   RUNNING |
+|               100 |  1 |   RUNNING |   WAITING |
+|               150 |  1 |   WAITING |     READY |
+|               150 |  1 |     READY |   RUNNING |
+|               200 |  4 |       NEW |     READY |
+|               250 |  1 |   RUNNING |   WAITING |
+|               251 |  4 |     READY |   RUNNING |
+|               291 |  4 |   RUNNING |   WAITING |
+|               300 |  1 |   WAITING |     READY |
+|               300 |  1 |     READY |   RUNNING |
+|               321 |  4 |   WAITING |     READY |
+|               400 |  3 |       NEW |     READY |
+|               400 |  1 |   RUNNING |   WAITING |
+|               401 |  3 |     READY |   RUNNING |
+|               450 |  1 |   WAITING |     READY |
+|               502 |  3 |   RUNNING |     READY |
+|               502 |  1 |     READY |   RUNNING |
+|               552 |  1 |   RUNNING |TERMINATED |
+|               552 |  3 |     READY |   RUNNING |
+|               600 |  5 |       NEW |     READY |
+|               651 |  3 |   RUNNING |   WAITING |
+|               652 |  4 |     READY |   RUNNING |
+|               692 |  4 |   RUNNING |   WAITING |
+|               693 |  5 |     READY |   RUNNING |
+|               711 |  3 |   WAITING |     READY |
+|               722 |  4 |   WAITING |     READY |
+|               794 |  5 |   RUNNING |     READY |
+|               794 |  3 |     READY |   RUNNING |
+|               894 |  3 |   RUNNING |TERMINATED |
+|               894 |  4 |     READY |   RUNNING |
+|               934 |  4 |   RUNNING |   WAITING |
+|               935 |  5 |     READY |   RUNNING |
+|               964 |  4 |   WAITING |     READY |
+|              1014 |  5 |   RUNNING |TERMINATED |
+|              1014 |  4 |     READY |   RUNNING |
+|              1054 |  4 |   RUNNING |   WAITING |
+|              1084 |  4 |   WAITING |     READY |
+|              1084 |  4 |     READY |   RUNNING |
+|              1124 |  4 |   RUNNING |   WAITING |
+|              1154 |  4 |   WAITING |     READY |
+|              1154 |  4 |     READY |   RUNNING |
+|              1174 |  4 |   RUNNING |TERMINATED |
++------------------------------------------------+
